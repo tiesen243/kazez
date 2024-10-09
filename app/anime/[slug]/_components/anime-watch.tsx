@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
-import NextVideo from 'next-video'
+import ReactPlayer from 'react-player'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { Typography } from '@/components/ui/typography'
@@ -27,15 +26,15 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
       {isEpisodeLoading || isAnimeLoading ? (
         <Skeleton className="aspect-video w-full" />
       ) : (
-        <NextVideo src={episode.data.sources.at(-1)?.url} className="rounded-lg" controls>
-          <Image
-            src={animeDetails.data.cover}
-            alt={animeDetails.data.title.english}
-            slot="poster"
-            className="h-full w-full object-cover"
-            fill
+        <div className="aspect-video">
+          <ReactPlayer
+            url={episode.data.sources.at(-1)?.url}
+            light={animeDetails.data.cover}
+            playing
+            controls
+            pip
           />
-        </NextVideo>
+        </div>
       )}
 
       <div>
