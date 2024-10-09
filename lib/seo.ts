@@ -11,9 +11,10 @@ interface Prams {
 }
 
 export const seo = (params: Prams): Metadata => {
-  const title = params.title ? `${params.title} | Create Yuki App` : 'Create Yuki App'
+  const title = params.title ? `${params.title} | Kazez` : 'Kazez'
   const description =
-    params.description ?? 'A Next.js template with TypeScript, Tailwind CSS, ESLint and Prettier'
+    params.description ??
+    'Watch anime online for free. Kazez is the best place to watch anime online.'
   const images = params.images ?? ['/api/og']
   const url = params.url ? `${getBaseUrl()}${params.url}` : getBaseUrl()
 
@@ -21,7 +22,7 @@ export const seo = (params: Prams): Metadata => {
     metadataBase: new URL(getBaseUrl()),
     title,
     description,
-    applicationName: 'Create Yuki App',
+    applicationName: 'Kazez',
     alternates: { canonical: url },
     openGraph: { url, images, type: 'website' },
     twitter: { card: 'summary_large_image' },

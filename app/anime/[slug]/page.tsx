@@ -12,7 +12,7 @@ interface Props {
 const Page: NextPage<Props> = ({ params }) => (
   <main className="container py-4">
     <AnimeDetails id={getIdFromSlug(params.slug)} />
-    <EpisodeList id={getIdFromSlug(params.slug)} />
+    <EpisodeList id={getIdFromSlug(params.slug)} slug={params.slug} />
     <AnimeRecommendations id={getIdFromSlug(params.slug)} />
   </main>
 )

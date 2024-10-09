@@ -1,11 +1,19 @@
 'use client'
 
+import Link from 'next/link'
+
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Typography } from '@/components/ui/typography'
 import { useAnime } from '@/hooks/use-anime'
 
-export const EpisodeList: React.FC<{ id: string }> = ({ id }) => {
+interface Props {
+  id: string
+  slug: string
+  currentEpisode?: string
+}
+
+export const EpisodeList: React.FC<Props> = ({ id, slug, currentEpisode }) => {
   const { data, isLoading } = useAnime(id)
 
   if (isLoading || !data)
@@ -30,8 +38,14 @@ export const EpisodeList: React.FC<{ id: string }> = ({ id }) => {
       <ul className="mt-4 flex flex-wrap gap-4">
         {data.episodes.map((episode) => (
           <li key={episode.id}>
-            <Button variant="outline">
-              {episode.number} - {episode.title}
+            <Button
+              variant="outline"
+              className={currentEpisode === episode.id ? 'bg-accent text-accent-foreground' : ''}
+              asChild
+            >
+              <Link href={`/anime/${slug}/${episode.id}`}>
+                {episode.number} - {episode.title}
+              </Link>
             </Button>
           </li>
         ))}
