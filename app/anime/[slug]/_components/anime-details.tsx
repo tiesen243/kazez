@@ -90,7 +90,7 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
             onClick={() => execute({ id: data.id, title, image: data.image })}
             disabled={isPending}
           >
-            {result.data?.saved || data.isInList ? 'Remove from list' : 'Add to list'}
+            {(result.data?.saved ?? data.isInList) ? 'Remove from list' : 'Add to list'}
           </Button>
         )}
       </article>
