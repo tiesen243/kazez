@@ -14,7 +14,7 @@ const Page: NextPage<{ searchParams: SearchAnimesProps }> = ({ searchParams }) =
 
     <SearchAnimes {...searchParams} />
 
-    <Pagination page={searchParams.page} others={{ ...searchParams }} className="mt-4" />
+    <Pagination page={searchParams.page} others={searchParams} className="mt-4" />
   </main>
 )
 

@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String @id @default(cuid())
+  discordId String @unique
+
+  email    String  @unique
+  username String  @unique
+  name     String?
+  avatar   String
+
+  comments    Comment[]
+  savedAnimes SavedAnime[]
+  sessions    Session[]
+
+  createdAt DateTime @default(now())
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId String
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String
+  animeId String
+
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId String
+}
+
+model SavedAnime {
+  id    String @id
+  image String
+  title String
+
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId String
+}

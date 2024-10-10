@@ -32,7 +32,18 @@ export const SearchAnimes: React.FC<SearchAnimesProps> = (props) => {
           No results found
         </p>
       ) : (
-        data.results.map((anime) => <AnimeCard key={anime.id} anime={anime} />)
+        data.results.map((anime) => (
+          <AnimeCard
+            key={anime.id}
+            anime={{
+              id: anime.id,
+              title:
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                anime.title?.userPreferred ?? anime.title?.romaji ?? anime.title?.english ?? ' ',
+              image: anime.image,
+            }}
+          />
+        ))
       )}
     </section>
   )
