@@ -46,7 +46,7 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
           </div>
         </article>
 
-        <Skeleton className="aspect-[3/4] w-full rounded-lg object-cover shadow-lg" />
+        <Skeleton className="hidden aspect-[3/4] w-full rounded-lg object-cover shadow-lg md:block" />
       </section>
     )
 
