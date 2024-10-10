@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { slugify } from '@/lib/utils'
 
 export const AnimeCard: React.FC<{ anime: Anime }> = ({ anime }) => {
-  const title = anime.title.userPreferred || anime.title.romaji || anime.title.english
+  const title = anime.title.userPreferred ?? anime.title.romaji ?? anime.title.english ?? ''
 
   return (
     <Link href={`/anime/${slugify(title, anime.id)}`} passHref>

@@ -31,14 +31,14 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
             url={episode.data.sources.at(-1)?.url}
             light={animeDetails.data.cover}
             width="100%"
-            playing
             controls
+            playing
             pip
           />
         </div>
       )}
 
-      <div>
+      <div className="flex flex-col gap-4">
         {isAnimeLoading ? (
           <Skeleton className="h-10 w-1/2" />
         ) : (
@@ -52,6 +52,15 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
           slug={params.slug}
           currentEpisode={params.episodeId}
         />
+
+        <a
+          href={episode.data?.download}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="pt-4 hover:underline"
+        >
+          Download Episode
+        </a>
       </div>
     </section>
   )

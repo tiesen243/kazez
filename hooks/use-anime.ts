@@ -21,9 +21,9 @@ export interface AnimeDetails {
   id: string
   malId: number
   title: {
-    romaji: string
-    english: string
-    native: string
+    romaji?: string
+    english?: string
+    native?: string
   }
   synonyms: string[]
   image: string

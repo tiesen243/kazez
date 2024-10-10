@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { Format, Genre, Season, Sort, Status } from './anime.enum'
+import type { Format, Genre, Sort, Status } from './anime.enum'
+import { Season } from './anime.enum'
 
 interface UseAnimesOptions {
   page?: number
@@ -79,9 +80,9 @@ export interface Anime {
   id: string
   malId: number
   title: {
-    userPreferred: string
-    english: string
-    romaji: string
+    userPreferred?: string
+    romaji?: string
+    english?: string
   }
   image: string
   cover: string
