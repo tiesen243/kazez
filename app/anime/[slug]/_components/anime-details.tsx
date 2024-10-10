@@ -21,6 +21,8 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
   if (isLoading || !data)
     return (
       <section className="grid gap-4 p-6 md:grid-cols-3">
+        <Skeleton className="absolute inset-0 w-full rounded-md object-fill" />
+
         <article className="rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm md:col-span-2">
           <Skeleton className="mb-2 h-10 w-1/2" />
           <Skeleton className="h-8 w-1/3" />
@@ -73,8 +75,8 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
 
         <Typography dangerouslySetInnerHTML={{ __html: data.description }} />
 
-        <div className="flex flex-1 items-center justify-between">
-          <Typography>Studio: {data.studios.join(', ')}</Typography>
+        <div className="my-4 flex flex-1 flex-wrap items-center gap-4">
+          <Typography className="mt-4">Studio: {data.studios.join(', ')}</Typography>
           <Typography>Status: {data.status}</Typography>
           <Typography>
             Episodes: {data.currentEpisode}/{data.totalEpisodes}
