@@ -67,7 +67,7 @@ export interface AnimeDetails {
 
 export interface Episode {
   id: string
-  title: string
+  title?: string
   number: number
   image: string
 }

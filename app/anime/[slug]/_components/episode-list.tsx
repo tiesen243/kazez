@@ -47,7 +47,7 @@ export const EpisodeList: React.FC<Props> = ({ id, slug, currentEpisode, classNa
               })}
               asChild
             >
-              <Link href={`/anime/${slug}/${episode.id}`}>{episode.title}</Link>
+              <Link href={`/anime/${slug}/${episode.id}`}>{episode.title ?? episode.number}</Link>
             </Button>
           </li>
         ))}
