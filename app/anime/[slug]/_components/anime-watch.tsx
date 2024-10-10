@@ -29,7 +29,10 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
         <div className="aspect-video w-full">
           <ReactPlayer
             url={
-              episode.data.sources.find((source) => source.isM3U8)?.url ??
+              episode.data.sources.find((source) => source.quality === '1080p')?.url ??
+              episode.data.sources.find((source) => source.quality === '720p')?.url ??
+              episode.data.sources.find((source) => source.quality === '480p')?.url ??
+              episode.data.sources.find((source) => source.quality === '360p')?.url ??
               episode.data.sources.at(-1)?.url
             }
             light={animeDetails.data.cover}
