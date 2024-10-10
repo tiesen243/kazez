@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 
-import { RecentEpisodes } from '@/components/home/recent-episodes'
+import { RecentEpisodes } from '@/app/anime/_components/recent-episodes'
+import { Pagination } from '@/components/pagination'
 
 interface Props {
   searchParams: { page: string }
@@ -20,6 +21,8 @@ const Page: NextPage<Props> = ({ searchParams }) => (
     <hr />
 
     <RecentEpisodes page={searchParams.page} />
+
+    <Pagination page={searchParams.page} />
   </main>
 )
 

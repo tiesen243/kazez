@@ -26,7 +26,7 @@ export const useAnimes = ({
   year = new Date().getFullYear(),
   sort = [],
   perPage = 10,
-  isRecent = true,
+  isRecent = false,
 }: UseAnimesOptions) =>
   useQuery({
     queryKey: [
@@ -47,8 +47,6 @@ export const useAnimes = ({
       const sp = new URLSearchParams({
         ...(query && { query }),
         page,
-        season,
-        year,
         perPage,
       }).toString()
 
