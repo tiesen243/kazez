@@ -24,7 +24,8 @@ export const generateMetadata = async ({ params }: Props, parent: ResolvingMetad
   const previousImages = (await parent).openGraph?.images ?? []
 
   return seo({
-    title: json.title.romaji ?? json.title.english ?? json.title.native ?? ' ',
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    title: json.title?.romaji ?? json.title?.english ?? json.title?.native ?? ' ',
     description: json.description,
     images: [json.cover, json.image, ...previousImages],
     url: `/anime/${params.slug}`,

@@ -6,14 +6,16 @@ import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Typography } from '@/components/ui/typography'
 import { useAnime } from '@/hooks/use-anime'
+import { cn } from '@/lib/utils'
 
 interface Props {
   id: string
   slug: string
   currentEpisode?: string
+  className?: string
 }
 
-export const EpisodeList: React.FC<Props> = ({ id, slug, currentEpisode }) => {
+export const EpisodeList: React.FC<Props> = ({ id, slug, currentEpisode, className }) => {
   const { data, isLoading } = useAnime(id)
 
   if (isLoading || !data)
@@ -21,10 +23,10 @@ export const EpisodeList: React.FC<Props> = ({ id, slug, currentEpisode }) => {
       <section className="mt-4">
         <Typography level="h2">Episodes</Typography>
 
-        <ul className="mt-4 flex flex-wrap gap-4">
+        <ul className={cn('mt-4 gap-4', className)}>
           {Array.from({ length: 12 }).map((_, index) => (
             <li key={index}>
-              <Skeleton className="h-10 w-24" />
+              <Skeleton className="h-10 w-full" />
             </li>
           ))}
         </ul>
@@ -35,12 +37,14 @@ export const EpisodeList: React.FC<Props> = ({ id, slug, currentEpisode }) => {
     <section className="mt-4 flex-1">
       <Typography level="h2">Episodes</Typography>
 
-      <ul className="mt-4 flex h-full max-h-[200px] flex-wrap gap-4 overflow-y-auto">
+      <ul className={cn('mt-4 gap-4', className)}>
         {data.episodes.map((episode) => (
           <li key={episode.id}>
             <Button
               variant="outline"
-              className={currentEpisode === episode.id ? 'bg-accent text-accent-foreground' : ''}
+              className={cn('w-full', {
+                'bg-accent text-accent-foreground': currentEpisode === episode.id,
+              })}
               asChild
             >
               <Link href={`/anime/${slug}/${episode.id}`}>{episode.title}</Link>

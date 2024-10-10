@@ -51,6 +51,7 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
           id={getIdFromSlug(params.slug)}
           slug={params.slug}
           currentEpisode={params.episodeId}
+          className="grid max-h-[400px] grid-cols-4 overflow-y-auto md:max-h-[150px] lg:grid-cols-6"
         />
 
         <a
