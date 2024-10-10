@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Typography } from '@/components/ui/typography'
 import { useSession } from '@/hooks/use-session'
 import { getComments } from '@/server/actions'
@@ -18,8 +19,11 @@ export const AnimeComment: React.FC<{ id: string }> = ({ id }) => {
 
   if (isLoading)
     return (
-      <section className="mt-4">
+      <section className="mt-4 flex flex-col gap-4">
         <Typography level="h2">Comments</Typography>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <Skeleton key={index} className="h-16 w-full" />
+        ))}
       </section>
     )
 
