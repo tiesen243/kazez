@@ -18,7 +18,7 @@ export const Auth: React.FC = () => {
 
   return (
     <Link href="/profile">
-      <Avatar>
+      <Avatar className="size-8">
         <AvatarImage src={session.user.avatar} alt={session.user.username} />
         <AvatarFallback>{session.user.username.slice(0, 2)}</AvatarFallback>
       </Avatar>

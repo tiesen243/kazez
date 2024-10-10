@@ -3,12 +3,12 @@
 import Link from 'next/link'
 import ReactPlayer from 'react-player'
 
+import { EpisodeList } from '@/app/anime/[slug]/_components/episode-list'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Typography } from '@/components/ui/typography'
 import { useAnime } from '@/hooks/use-anime'
 import { useEpisode } from '@/hooks/use-episode'
 import { getIdFromSlug } from '@/lib/utils'
-import { EpisodeList } from './episode-list'
 
 export interface Props {
   params: { slug: string; episodeId: string }
@@ -28,7 +28,10 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
       ) : (
         <div className="aspect-video w-full">
           <ReactPlayer
-            url={episode.data.sources.find((source) => source.quality === '1080p')?.url}
+            url={
+              episode.data.sources.find((source) => source.isM3U8)?.url ??
+              episode.data.sources.at(-1)?.url
+            }
             light={animeDetails.data.cover}
             width="100%"
             controls
@@ -53,15 +56,6 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
           currentEpisode={params.episodeId}
           className="grid max-h-[400px] grid-cols-4 overflow-y-auto md:max-h-[150px] lg:grid-cols-6"
         />
-
-        <a
-          href={episode.data?.download}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="pt-4 hover:underline"
-        >
-          Download Episode
-        </a>
       </div>
     </section>
   )
