@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import type { Genre, Status } from './anime.enum'
 import type { Anime } from './use-animes'
+import { checkInList } from '@/server/actions'
 
 export const useAnime = (id: string) =>
   useQuery({
@@ -13,7 +14,12 @@ export const useAnime = (id: string) =>
 
       const json = (await res.json()) as AnimeDetails
 
-      return json
+      const isInList = await checkInList({ id })
+
+      return {
+        ...json,
+        isInList: isInList?.data?.inList ?? false,
+      }
     },
   })
 
