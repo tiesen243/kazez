@@ -33,7 +33,7 @@ export const AnimeComment: React.FC<{ id: string }> = ({ id }) => {
 
             <div className="absolute left-4 top-1 h-full w-[1px] animate-pulse bg-secondary" />
 
-            <Skeleton className="ml-10 mr-16 mt-2 h-6 w-full" />
+            <Skeleton className="ml-10 mr-16 mt-2 h-6 w-4/5" />
           </div>
         ))}
       </section>

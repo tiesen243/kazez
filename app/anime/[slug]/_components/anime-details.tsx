@@ -62,12 +62,12 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
         fill
       />
 
-      <article className="flex flex-col rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm md:col-span-2">
+      <article className="flex w-full flex-col rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm md:col-span-2">
         <Typography level="h1" className="mb-2">
           {title}
         </Typography>
 
-        <ul className="mt-4 flex items-center gap-2">
+        <ul className="mt-4 flex flex-wrap items-center gap-2">
           {data.genres.map((genre) => (
             <Badge key={genre}>{genre}</Badge>
           ))}
