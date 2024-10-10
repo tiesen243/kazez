@@ -12,8 +12,8 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
 
   if (isLoading || !data)
     return (
-      <section className="grid grid-cols-3 gap-4 p-6">
-        <article className="col-span-2 rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm">
+      <section className="grid gap-4 p-6 md:grid-cols-3">
+        <article className="rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm md:col-span-2">
           <Skeleton className="mb-2 h-10 w-1/2" />
           <Skeleton className="h-8 w-1/3" />
 
@@ -41,9 +41,9 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
     )
 
   return (
-    <section className="grid grid-cols-3 gap-4 p-6">
+    <section className="grid gap-4 p-6 md:grid-cols-3">
       <Image src={data.cover} alt={data.title.romaji} className="rounded-md object-cover" fill />
-      <article className="col-span-2 rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm">
+      <article className="rounded-lg bg-background/70 p-4 shadow-lg backdrop-blur-sm md:col-span-2">
         <Typography level="h1" className="mb-2">
           {data.title.romaji}
         </Typography>
@@ -73,7 +73,7 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
         alt={data.title.romaji}
         width={200}
         height={300}
-        className="aspect-[3/4] w-full rounded-lg object-cover shadow-lg"
+        className="hidden aspect-[3/4] w-full rounded-lg object-cover shadow-lg md:block"
       />
     </section>
   )

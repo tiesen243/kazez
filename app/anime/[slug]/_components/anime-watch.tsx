@@ -22,14 +22,15 @@ export const AnimeWatch: React.FC<Props> = ({ params }) => {
   const isAnimeLoading = animeDetails.isLoading || !animeDetails.data
 
   return (
-    <section className="grid grid-cols-2 gap-4">
+    <section className="grid gap-4 md:grid-cols-2">
       {isEpisodeLoading || isAnimeLoading ? (
         <Skeleton className="aspect-video w-full" />
       ) : (
-        <div className="aspect-video">
+        <div className="aspect-video w-full">
           <ReactPlayer
             url={episode.data.sources.at(-1)?.url}
             light={animeDetails.data.cover}
+            width="100%"
             playing
             controls
             pip

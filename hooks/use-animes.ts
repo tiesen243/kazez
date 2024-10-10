@@ -13,6 +13,7 @@ interface UseAnimesOptions {
   status?: Status | ''
   sort?: Sort[]
   perPage?: number
+  isRecent?: boolean
 }
 
 export const useAnimes = ({
@@ -25,9 +26,22 @@ export const useAnimes = ({
   year = new Date().getFullYear(),
   sort = [],
   perPage = 10,
+  isRecent = true,
 }: UseAnimesOptions) =>
   useQuery({
-    queryKey: ['animes', page, query, genres, format, status, season, year, sort],
+    queryKey: [
+      'animes',
+      page,
+      query,
+      genres,
+      format,
+      status,
+      season,
+      year,
+      sort,
+      perPage,
+      isRecent,
+    ],
     queryFn: async () => {
       // @ts-expect-error URLSearchParams is not defined
       const sp = new URLSearchParams({
@@ -38,8 +52,12 @@ export const useAnimes = ({
         perPage,
       }).toString()
 
+      const url = isRecent
+        ? `recent-episodes?page=${page}&perPage=${perPage}`
+        : `advanced-search?${sp}`
+
       const res = await fetch(
-        `https://consumet-api-production-9bed.up.railway.app/meta/anilist/advanced-search?${sp}`,
+        `https://consumet-api-production-9bed.up.railway.app/meta/anilist/${url}`,
       )
 
       const json = (await res.json()) as {
