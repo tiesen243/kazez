@@ -7,11 +7,16 @@ import { useAnimes } from '@/hooks/use-animes'
 export const SearchAnimes: React.FC<SearchAnimesProps> = (props) => {
   const { data, isLoading } = useAnimes({
     query: props.q,
-    page: Number(props.page || 1),
+    format: props.format,
+    season: props.season,
+    genres: props.genres,
+    year: Number(props.year),
+    status: props.status,
+    page: Number(props.page ?? 1),
     perPage: 12,
   })
 
-  if (isLoading || !data)
+  if (isLoading || !data?.results)
     return (
       <section className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {Array.from({ length: 12 }).map((_, i) => (
@@ -32,11 +37,11 @@ export const SearchAnimes: React.FC<SearchAnimesProps> = (props) => {
 }
 
 export interface SearchAnimesProps {
-  q: string
-  format: Format
-  genre: Genre
-  year: number
-  season: Season
-  status: Status
-  page: string
+  q?: string
+  format?: Format
+  genres?: Genre[]
+  year?: string
+  season?: Season
+  status?: Status
+  page?: string
 }

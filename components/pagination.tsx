@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export const Pagination: React.FC<{
-  page: string
+  page?: string
   className?: string
   others?: Record<string, string>
 }> = ({ page = '1', className = '', others }) => {

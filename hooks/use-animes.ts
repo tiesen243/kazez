@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import type { Format, Genre, Sort, Status } from './anime.enum'
-import { Season } from './anime.enum'
+import { Format, Genre, Season, Sort, Status } from './anime.enum'
 
 interface UseAnimesOptions {
   page?: number
@@ -17,14 +16,14 @@ interface UseAnimesOptions {
 }
 
 export const useAnimes = ({
+  query,
+  genres,
+  format,
+  status,
+  season,
+  year,
+  sort,
   page = 1,
-  query = '',
-  genres = [],
-  format = '',
-  status = '',
-  season = getSeason(),
-  year = new Date().getFullYear(),
-  sort = [],
   perPage = 10,
   isRecent = false,
 }: UseAnimesOptions) =>
@@ -46,6 +45,13 @@ export const useAnimes = ({
       // @ts-expect-error URLSearchParams is not defined
       const sp = new URLSearchParams({
         ...(query && { query }),
+        ...(genres && { genres }),
+        ...(format && { format }),
+        ...(status && { status }),
+        ...(season && { season }),
+        ...(year && { year }),
+        ...(sort && { sort }),
+
         page,
         perPage,
       }).toString()
@@ -89,7 +95,7 @@ export interface Anime {
   popularity: number
 }
 
-const getSeason = () => {
+export const getCurrentSeason = () => {
   const month = new Date().getMonth()
   if (month >= 1 && month <= 3) return Season.Winter
   if (month >= 4 && month <= 6) return Season.Spring
