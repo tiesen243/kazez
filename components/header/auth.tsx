@@ -1,11 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { auth } from '@/server/auth'
+import { useSession } from '@/hooks/use-session'
 
-export const Auth: React.FC = async () => {
-  const session = await auth()
+export const Auth: React.FC = () => {
+  const session = useSession()
 
   if (!session)
     return (
@@ -15,7 +17,7 @@ export const Auth: React.FC = async () => {
     )
 
   return (
-    <Link href={`/u/${session.user.id}`}>
+    <Link href="/profile">
       <Avatar>
         <AvatarImage src={session.user.avatar} alt={session.user.username} />
         <AvatarFallback>{session.user.username.slice(0, 2)}</AvatarFallback>

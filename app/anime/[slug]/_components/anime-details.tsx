@@ -8,14 +8,13 @@ import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Typography } from '@/components/ui/typography'
 import { useAnime } from '@/hooks/use-anime'
+import { useSession } from '@/hooks/use-session'
 import { slugify } from '@/lib/utils'
 import { toggleSaveAnime } from '@/server/actions'
 
-export const AnimeDetails: React.FC<{ id: string; isAuth?: boolean }> = ({
-  id,
-  isAuth = false,
-}) => {
+export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
   const { data, isLoading } = useAnime(id)
+  const session = useSession()
 
   const { execute, isPending, result } = useAction(toggleSaveAnime)
 
@@ -84,7 +83,7 @@ export const AnimeDetails: React.FC<{ id: string; isAuth?: boolean }> = ({
           <Typography>Popularity: {data.popularity}</Typography>
         </div>
 
-        {isAuth && (
+        {session && (
           <Button
             onClick={() => execute({ id: data.id, title, image: data.image })}
             disabled={isPending}

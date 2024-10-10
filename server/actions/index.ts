@@ -5,18 +5,11 @@ import { z } from 'zod'
 
 import { protectedAction, publicAction } from '@/server/actions/safe-action'
 
-export const getUser = publicAction
-  .metadata({ name: 'getUser' })
-  .schema(z.object({ id: z.string() }))
-  .action(async ({ ctx, parsedInput }) => {
-    const user = await ctx.db.user.findUnique({ where: { id: parsedInput.id } })
-    if (!user) return { user: null, isCurrentUser: false, savedAnime: [] }
-
-    const savedAnime = await ctx.db.savedAnime.findMany({
-      where: { userId: user.id },
-    })
-
-    return { user, savedAnime }
+export const getSavedAnime = protectedAction
+  .metadata({ name: 'getSavedAnime' })
+  .action(async ({ ctx }) => {
+    const savedAnime = await ctx.db.savedAnime.findMany({ where: { userId: ctx.session.user.id } })
+    return savedAnime
   })
 
 export const checkInList = publicAction
@@ -66,6 +59,40 @@ export const loadSavedAnime = protectedAction
 
     if (savedAnime.length === 0) return []
     return savedAnime
+  })
+
+export const getComments = publicAction
+  .metadata({ name: 'getComments' })
+  .schema(z.object({ id: z.string() }))
+  .action(async ({ ctx, parsedInput }) => {
+    const comments = await ctx.db.comment.findMany({
+      where: { animeId: parsedInput.id },
+      include: { user: true },
+    })
+    if (comments.length === 0) return []
+    return comments
+  })
+
+export const addComment = protectedAction
+  .metadata({ name: 'addComment' })
+  .schema(z.object({ id: z.string(), content: z.string() }))
+  .action(async ({ ctx, parsedInput }) => {
+    await ctx.db.comment.create({
+      data: {
+        animeId: parsedInput.id,
+        content: parsedInput.content,
+        user: { connect: { id: ctx.session.user.id } },
+      },
+    })
+    return { success: true }
+  })
+
+export const deleteComment = protectedAction
+  .metadata({ name: 'deleteComment' })
+  .schema(z.object({ id: z.string() }))
+  .action(async ({ ctx, parsedInput }) => {
+    await ctx.db.comment.delete({ where: { id: parsedInput.id } })
+    return { success: true }
   })
 
 export const signOut = protectedAction.metadata({ name: 'signOut' }).action(async ({ ctx }) => {
