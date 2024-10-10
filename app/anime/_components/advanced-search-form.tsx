@@ -21,10 +21,10 @@ export const AdvancedSearchForm: React.FC<SearchAnimesProps> = (def) => {
 
     Object.keys(search).forEach((key) => {
       if (search[key] === ' ' || search[key] === '') delete search[key]
-      if (key === 'genres' || key === 'sort') search[key] = JSON.stringify([search[key]])
+      else if (key === 'genres' || key === 'sort') search[key] = JSON.stringify([search[key]])
     })
 
-    // @ts-expect-error URLSearchParams is not defined
+    // @ts-expect-error search is an object
     redirect(`/anime?${new URLSearchParams(search).toString()}`)
   }
 
@@ -112,7 +112,7 @@ export const AdvancedSearchForm: React.FC<SearchAnimesProps> = (def) => {
         </Select>
       </fieldset>
 
-      <span className="col-span-2">
+      <span className="col-span-2 text-sm text-muted-foreground">
         Current season: {getCurrentSeason()} - {new Date().getFullYear()}
       </span>
 

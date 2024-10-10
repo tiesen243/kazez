@@ -28,7 +28,9 @@ export const SearchAnimes: React.FC<SearchAnimesProps> = (props) => {
   return (
     <section className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
       {data.results.length === 0 ? (
-        <p>No results found</p>
+        <p className="col-span-2 text-center text-xl text-muted-foreground md:col-span-3 lg:col-span-4">
+          No results found
+        </p>
       ) : (
         data.results.map((anime) => <AnimeCard key={anime.id} anime={anime} />)
       )}
