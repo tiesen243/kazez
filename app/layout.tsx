@@ -13,6 +13,7 @@ export const metadata = seo({})
 
 const RootLayout: React.FC<React.PropsWithChildren> = async ({ children }) => {
   const session = await auth()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-dvh font-sans', GeistSans.variable)}>

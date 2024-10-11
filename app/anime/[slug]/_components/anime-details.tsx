@@ -75,12 +75,15 @@ export const AnimeDetails: React.FC<{ id: string }> = ({ id }) => {
 
         <Typography dangerouslySetInnerHTML={{ __html: data.description }} />
 
-        <div className="my-4 flex flex-1 flex-wrap items-center gap-4">
+        <div className="my-4 grid flex-1 grid-cols-2 gap-4 md:grid-cols-3">
           <Typography className="mt-4">Studio: {data.studios.join(', ')}</Typography>
           <Typography>Status: {data.status}</Typography>
           <Typography>
             Episodes: {data.currentEpisode}/{data.totalEpisodes}
           </Typography>
+          <Typography>Genres: {data.genres.join(', ')}</Typography>
+          <Typography>Season: {data.season}</Typography>
+          <Typography>Year: {data.releaseDate}</Typography>
           <Typography>Rating: {data.rating}</Typography>
           <Typography>Popularity: {data.popularity}</Typography>
         </div>

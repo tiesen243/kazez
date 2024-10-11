@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SearchIcon } from 'lucide-react'
 
+import { Auth } from '@/components/header/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Auth } from './auth'
 
 export const Header: React.FC = () => (
   <header className="sticky inset-0 z-50 border-b bg-background/70 py-2 backdrop-blur-xl backdrop-saturate-150">
